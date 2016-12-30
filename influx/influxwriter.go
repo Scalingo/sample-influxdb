@@ -34,7 +34,6 @@ func Write(bp *influx.BatchPoints) error {
 }
 
 func Add(measurement string, values map[string]interface{}, tags map[string]string, bp *influx.BatchPoints, time time.Time) error {
-
 	pt, err := influx.NewPoint(measurement, tags, values, time)
 	if err != nil {
 		return errgo.Mask(err)

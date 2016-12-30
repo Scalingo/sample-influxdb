@@ -45,6 +45,7 @@ func init() {
 	if err != nil {
 		log.Fatalf("Cannot parse the INFLUX_URL connection string: %+v\n", err)
 	}
+	log.Printf("Will use the following database: %+v\n", InfluxConnectionInformation)
 }
 
 func parseConnectionString(con string) (*InfluxInfo, error) {
