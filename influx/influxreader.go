@@ -19,8 +19,8 @@ type InfluxValue struct {
 func LastMinutesTweets() ([]InfluxValue, bool, error) {
 	queryString := "SELECT count(\"value\") FROM \"tweets\""
 	queryString += " WHERE hashtag = '" + config.E["HASHTAG"] + "'"
-	queryString += " AND   time >= now() - 1m"
-	queryString += " GROUP BY time(1m) fill(none) ORDER BY time DESC LIMIT 1"
+	queryString += " AND   time >= now() - " + config.E["LAST_MINUTES"] + "m"
+	queryString += " GROUP BY time(1m) fill(none) ORDER BY time DESC LIMIT " + config.E["LAST_MINUTES"]
 
 	return executeQuery(queryString)
 }

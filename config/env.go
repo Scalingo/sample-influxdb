@@ -18,8 +18,9 @@ type InfluxInfo struct {
 
 var (
 	E = map[string]string{
-		"INFLUX_URL": "",
-		"HASHTAG":    "",
+		"INFLUX_URL":   "",
+		"HASHTAG":      "",
+		"LAST_MINUTES": "60",
 		// Twitter credentials to access Twitter API
 		"TWITTER_CONSUMER_KEY":    "",
 		"TWITTER_CONSUMER_SECRET": "",

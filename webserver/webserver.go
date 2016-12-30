@@ -7,13 +7,15 @@ import (
 	"os"
 
 	"github.com/Scalingo/sample-influxdb/config"
+	"github.com/Scalingo/sample-influxdb/influx"
 	"github.com/Scalingo/sample-influxdb/utils"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 )
 
 type Variables struct {
-	Hashtag string
+	Hashtag     string
+	LastMinutes string
 }
 
 func Start() utils.Closer {
@@ -26,8 +28,19 @@ func Start() utils.Closer {
 
 	m.Get("/", func(r render.Render) {
 		r.HTML(200, "index", Variables{
-			Hashtag: config.E["HASHTAG"],
+			Hashtag:     config.E["HASHTAG"],
+			LastMinutes: config.E["LAST_MINUTES"],
 		})
+	})
+
+	m.Get("/tweets", func(r render.Render) {
+		tweets, _, err := influx.LastMinutesTweets()
+		if err != nil {
+			log.Printf("Error retrieving the last tweets: %+v\n", err)
+			r.Error(500)
+			return
+		}
+		r.JSON(200, tweets)
 	})
 
 	port := "3000"
