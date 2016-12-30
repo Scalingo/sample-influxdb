@@ -7,7 +7,6 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/Scalingo/sample-influxdb/influx"
 	"github.com/Scalingo/sample-influxdb/utils"
 	"github.com/Scalingo/sample-influxdb/webserver"
 	"github.com/Scalingo/sample-influxdb/worker"
@@ -16,8 +15,6 @@ import (
 func main() {
 	flagIsWorker := flag.Bool("worker", false, "is a worker")
 	flag.Parse()
-
-	influx.CreateDatabase()
 
 	var closer utils.Closer
 	if *flagIsWorker {
