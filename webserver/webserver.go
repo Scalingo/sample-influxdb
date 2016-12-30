@@ -6,10 +6,15 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/Scalingo/sample-influxdb/config"
 	"github.com/Scalingo/sample-influxdb/utils"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 )
+
+type Variables struct {
+	Hashtag string
+}
 
 func Start() utils.Closer {
 	m := martini.Classic()
@@ -20,7 +25,9 @@ func Start() utils.Closer {
 	))
 
 	m.Get("/", func(r render.Render) {
-		r.HTML(200, "index", nil)
+		r.HTML(200, "index", Variables{
+			Hashtag: config.E["HASHTAG"],
+		})
 	})
 
 	port := "3000"
