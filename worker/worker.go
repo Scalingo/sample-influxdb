@@ -41,7 +41,7 @@ func Start() utils.Closer {
 	fmt.Println("Starting Stream...")
 
 	filterParams := &twitter.StreamFilterParams{
-		Track:         []string{"#osezdirenon"},
+		Track:         []string{"#" + config.E["HASHTAG"]},
 		StallWarnings: twitter.Bool(true),
 	}
 	stream, err := client.Streams.Filter(filterParams)
@@ -69,7 +69,7 @@ func addTweet(createdAt, t string) {
 		return
 	}
 	err = influx.Add("tweets", map[string]interface{}{"value": 1},
-		map[string]string{"type": t}, bp, *date)
+		map[string]string{"type": t, "hashtag": config.E["HASHTAG"]}, bp, *date)
 	if err != nil {
 		log.Printf("Error adding new point to InfluxDB: %+v\n", err)
 		return

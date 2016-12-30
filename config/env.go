@@ -19,6 +19,7 @@ type InfluxInfo struct {
 var (
 	E = map[string]string{
 		"INFLUX_URL": "",
+		"HASHTAG":    "",
 		// Twitter credentials to access Twitter API
 		"TWITTER_CONSUMER_KEY":    "",
 		"TWITTER_CONSUMER_SECRET": "",
@@ -34,6 +35,10 @@ func init() {
 		if v := os.Getenv(variable); v != "" {
 			E[variable] = v
 		}
+	}
+
+	if E["HASHTAG"] == "" {
+		log.Fatal("HASHTAG must be set")
 	}
 
 	var err error

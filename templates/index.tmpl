@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <link rel="stylesheet" href="c3/c3.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,500" rel="stylesheet">
     <style>
       body { color: #373a3c; font-family: 'Roboto', sans-serif; font-size: 1rem; line-height: 1.5; font-weight: 300; }
@@ -57,7 +58,7 @@
       .btn:active:focus, .btn:active:hover { background-color: #014682; border-color: #01315a; color: #fff; }
       .scalingo-logo { max-width: 100%; height: auto; width: 330px; }
       .heart-logo { margin: 0 20px; width:56px;position:relative; top:-18px; }
-      .tech-logo { width:56px;height:100px; }
+      .influxdb-logo { max-width: 100%; height: auto; width: 330px; }
       @media (min-width:768px){
         .container { width: 800px; }
         .one-liner { display: block; }
@@ -67,16 +68,46 @@
         .scalingo-logo, .heart-logo { margin-bottom: 1rem; }
       }
     </style>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="c3/c3.min.js"></script>
   </head>
   <body>
     <div class="container hero">
       <div class="love">
         <img class="scalingo-logo" alt="Scalingo" src="https://scalingo.com/logo-lightgrey.svg">
         <img class="heart-logo" alt="love" src="https://cdn.scalingo.com/documentation/heart.png">
-        <img class="influxdb-logo" alt="InfluxDB" src="./influxdb_logo.svg">
+        <img class="influxdb-logo" alt="InfluxDB" src="influxdb_logo.svg">
       </div>
       <h1>Greetings from a sample Go app <br/> built with the Martini framework<br/>and an InfluxDB
         database!</h1>
+
+      <h2>Number of tweets for the hashtag #</h2>
+      <div id="chart"></div>
+      <script>
+        var chart = c3.generate({
+          bindto: '#chart',
+          data: {
+            columns: [
+              ['#tweets', 30, 200, 100, 400, 150, 250],
+            ]
+          },
+          axis: {
+            y: {
+              label: {
+                text: "Number of tweets",
+                position: "outter-middle",
+              }
+            },
+            x: {
+              label: {
+                text: "Time",
+                position: "center",
+              }
+            }
+          },
+        });
+      </script>
+      
       <h2>
         <span style="display:block;"><span class="one-liner">Deploying your own Go/Martini/InfluxDB app on Scalingo</span> is as easy as pie:</span>
         <a class="btn"
@@ -85,6 +116,7 @@
       </h2>
       <p>The code of this sample lives <a href="https://github.com/Scalingo/sample-influxdb">on GitHub</a>. You can find <a href="http://samples.scalingo.com">more samples here</a>.</p>
     </div>
+
     <footer>
       <div class="container">
         <p>

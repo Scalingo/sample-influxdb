@@ -8,8 +8,11 @@ services:
       - ./data/influxdb:/var/lib/influxdb/data
   sample-influxdb-worker:
     build: .
+    volumes:
+      - ./:/go/src/github.com/Scalingo/sample-influxdb
     environment:
       INFLUX_URL: http://influxdb:8086/tweets
+      HASHTAG: osezdirenon
       TWITTER_CONSUMER_KEY: 
       TWITTER_CONSUMER_SECRET: 
       TWITTER_ACCESS_TOKEN: 
@@ -19,12 +22,13 @@ services:
     command: reflex -r '\.go$$' -s -- sh -c 'go build && ./sample-influxdb -worker'
   sample-influxdb:
     build: .
+    volumes:
+      - ./:/go/src/github.com/Scalingo/sample-influxdb
     ports:
       - 3000:3000
     environment:
       INFLUX_URL: http://influxdb:8086/tweets
+      HASHTAG: osezdirenon
     links:
       - influxdb
     command: reflex -r '\.go$$' -s -- sh -c 'go build && ./sample-influxdb'
-
-
