@@ -2,6 +2,9 @@
 	"ImportPath": "github.com/Scalingo/sample-influxdb",
 	"GoVersion": "go1.6",
 	"GodepVersion": "v74",
+	"Packages": [
+		"./..."
+	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/cenkalti/backoff",
@@ -37,6 +40,21 @@
 			"Rev": "9235644dd9e52eeae6fa48efd539fdc351a0af53"
 		},
 		{
+			"ImportPath": "github.com/influxdata/influxdb/client/v2",
+			"Comment": "v1.1.0-178-gb650834",
+			"Rev": "b6508348482eab126825855423c7aecb48a31813"
+		},
+		{
+			"ImportPath": "github.com/influxdata/influxdb/models",
+			"Comment": "v1.1.0-178-gb650834",
+			"Rev": "b6508348482eab126825855423c7aecb48a31813"
+		},
+		{
+			"ImportPath": "github.com/influxdata/influxdb/pkg/escape",
+			"Comment": "v1.1.0-178-gb650834",
+			"Rev": "b6508348482eab126825855423c7aecb48a31813"
+		},
+		{
 			"ImportPath": "github.com/martini-contrib/render",
 			"Rev": "ec18f8345a1181146728238980606fb1d6f40e8c"
 		},
@@ -47,6 +65,10 @@
 		{
 			"ImportPath": "golang.org/x/net/context",
 			"Rev": "8fd7f25955530b92e73e9e1932a41b522b22ccd9"
+		},
+		{
+			"ImportPath": "gopkg.in/errgo.v1",
+			"Rev": "66cb46252b94c1f3d65646f54ee8043ab38d766c"
 		}
 	]
 }

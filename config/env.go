@@ -2,17 +2,31 @@ package config
 
 import (
 	"log"
+	"net/url"
 	"os"
+
+	errgo "gopkg.in/errgo.v1"
 )
+
+type InfluxInfo struct {
+	Host             string
+	User             string
+	Password         string
+	Database         string
+	ConnectionString string
+}
 
 var (
 	E = map[string]string{
+		"INFLUX_URL": "",
 		// Twitter credentials to access Twitter API
 		"TWITTER_CONSUMER_KEY":    "",
 		"TWITTER_CONSUMER_SECRET": "",
 		"TWITTER_ACCESS_TOKEN":    "",
 		"TWITTER_ACCESS_SECRET":   "",
 	}
+
+	InfluxConnectionInformation *InfluxInfo
 )
 
 func init() {
@@ -25,4 +39,31 @@ func init() {
 	if E["TWITTER_CONSUMER_KEY"] == "" || E["TWITTER_CONSUMER_SECRET"] == "" || E["TWITTER_ACCESS_TOKEN"] == "" || E["TWITTER_ACCESS_SECRET"] == "" {
 		log.Fatal("Missing Twitter OAuth1 information")
 	}
+
+	var err error
+	InfluxConnectionInformation, err = parseConnectionString(E["INFLUX_URL"])
+	if err != nil {
+		log.Fatalf("Cannot parse the INFLUX_URL connection string: %+v\n", err)
+	}
+}
+
+func parseConnectionString(con string) (*InfluxInfo, error) {
+	url, err := url.Parse(con)
+	if err != nil {
+		return nil, errgo.Mask(err)
+	}
+
+	var password, username string
+	if url.User != nil {
+		password, _ = url.User.Password()
+		username = url.User.Username()
+	}
+
+	return &InfluxInfo{
+		Host:             url.Scheme + "://" + url.Host,
+		User:             username,
+		Password:         password,
+		Database:         url.Path[1:],
+		ConnectionString: con,
+	}, nil
 }
