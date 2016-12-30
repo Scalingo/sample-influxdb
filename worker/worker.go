@@ -3,6 +3,7 @@ package worker
 import (
 	"fmt"
 	"log"
+	"sync"
 	"time"
 
 	"github.com/Scalingo/sample-influxdb/config"
@@ -19,6 +20,10 @@ type workerCloser struct {
 func (w workerCloser) Close() error {
 	w.stream.Stop()
 	return nil
+}
+
+func init() {
+	mutex = &sync.Mutex{}
 }
 
 func Start() utils.Closer {
@@ -57,6 +62,7 @@ func Start() utils.Closer {
 	return closer
 }
 
+var mutex *sync.Mutex
 var nbTweetsCurrentDate map[string]int
 
 func addTweet(createdAt, t string) {
@@ -64,6 +70,8 @@ func addTweet(createdAt, t string) {
 	if date == nil {
 		return
 	}
+
+	mutex.Lock()
 	if _, ok := nbTweetsCurrentDate[createdAt]; ok {
 		nbTweetsCurrentDate[createdAt] += 1
 	} else {
@@ -71,6 +79,7 @@ func addTweet(createdAt, t string) {
 		nbTweetsCurrentDate = make(map[string]int)
 		nbTweetsCurrentDate[createdAt] = 1
 	}
+	mutex.Unlock()
 
 	bp, err := influx.Start()
 	if err != nil {
