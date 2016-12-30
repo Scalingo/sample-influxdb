@@ -17,7 +17,7 @@ type InfluxValue struct {
 // For the last values we took the two last values. The controller will only take the second one. This prevent null value or incomplete aggregation.
 
 func LastMinutesTweets() ([]InfluxValue, bool, error) {
-	queryString := "SELECT count(\"value\") FROM \"tweets\""
+	queryString := "SELECT SUM(\"value\") FROM \"tweets\""
 	queryString += " WHERE hashtag = '" + config.E["HASHTAG"] + "'"
 	queryString += " AND   time >= now() - " + config.E["LAST_MINUTES"] + "m"
 	queryString += " GROUP BY time(1m) fill(none) ORDER BY time DESC LIMIT " + config.E["LAST_MINUTES"]

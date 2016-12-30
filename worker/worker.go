@@ -57,10 +57,19 @@ func Start() utils.Closer {
 	return closer
 }
 
+var nbTweetsCurrentDate map[string]int
+
 func addTweet(createdAt, t string) {
 	date := parseTime(createdAt)
 	if date == nil {
 		return
+	}
+	if _, ok := nbTweetsCurrentDate[createdAt]; ok {
+		nbTweetsCurrentDate[createdAt] += 1
+	} else {
+		// We just want to keep the record for the current second
+		nbTweetsCurrentDate = make(map[string]int)
+		nbTweetsCurrentDate[createdAt] = 1
 	}
 
 	bp, err := influx.Start()
@@ -68,7 +77,7 @@ func addTweet(createdAt, t string) {
 		log.Printf("Error starting the InfluxDB writer: %+v\n", err)
 		return
 	}
-	err = influx.Add("tweets", map[string]interface{}{"value": 1},
+	err = influx.Add("tweets", map[string]interface{}{"value": nbTweetsCurrentDate[createdAt]},
 		map[string]string{"type": t, "hashtag": config.E["HASHTAG"]}, bp, *date)
 	if err != nil {
 		log.Printf("Error adding new point to InfluxDB: %+v\n", err)
