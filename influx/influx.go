@@ -1,6 +1,8 @@
 package influx
 
 import (
+	"log"
+
 	"github.com/Scalingo/sample-influxdb/config"
 	influx "github.com/influxdata/influxdb/client/v2"
 
@@ -19,4 +21,12 @@ func Client() (influx.Client, error) {
 	}
 
 	return client, err
+}
+
+func CreateDatabase() {
+	queryString := "CREATE DATABASE tweets"
+	_, _, err := executeQuery(queryString)
+	if err != nil {
+		log.Fatalf("Cannot create the database: %+v\n", err)
+	}
 }
