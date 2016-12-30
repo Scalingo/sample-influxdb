@@ -60,6 +60,7 @@ func parseConnectionString(con string) (*InfluxInfo, error) {
 	if url.User != nil {
 		password, _ = url.User.Password()
 		username = url.User.Username()
+		log.Printf("User: %s - Password: %s\n", username, password)
 	}
 
 	return &InfluxInfo{
