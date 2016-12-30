@@ -36,10 +36,6 @@ func init() {
 		}
 	}
 
-	if E["TWITTER_CONSUMER_KEY"] == "" || E["TWITTER_CONSUMER_SECRET"] == "" || E["TWITTER_ACCESS_TOKEN"] == "" || E["TWITTER_ACCESS_SECRET"] == "" {
-		log.Fatal("Missing Twitter OAuth1 information")
-	}
-
 	var err error
 	InfluxConnectionInformation, err = parseConnectionString(E["INFLUX_URL"])
 	if err != nil {

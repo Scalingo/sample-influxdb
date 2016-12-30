@@ -3,10 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/Scalingo/sample-influxdb/config"
 	"github.com/Scalingo/sample-influxdb/utils"
 	"github.com/Scalingo/sample-influxdb/webserver"
 	"github.com/Scalingo/sample-influxdb/worker"
@@ -18,6 +20,10 @@ func main() {
 
 	var closer utils.Closer
 	if *flagIsWorker {
+		if config.E["TWITTER_CONSUMER_KEY"] == "" || config.E["TWITTER_CONSUMER_SECRET"] == "" ||
+			config.E["TWITTER_ACCESS_TOKEN"] == "" || config.E["TWITTER_ACCESS_SECRET"] == "" {
+			log.Fatal("Missing Twitter OAuth1 information")
+		}
 		closer = worker.Start()
 	} else {
 		closer = webserver.Start()

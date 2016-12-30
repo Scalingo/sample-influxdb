@@ -7,7 +7,6 @@ services:
     volumes:
       - ./data/influxdb:/var/lib/influxdb/data
   sample-influxdb-worker:
-    image: scalingo/sample-influxdb:latest
     build: .
     environment:
       INFLUX_URL: http://influxdb:8086/tweets
@@ -18,4 +17,14 @@ services:
     links:
       - influxdb
     command: reflex -r '\.go$$' -s -- sh -c 'go build && ./sample-influxdb -worker'
+  sample-influxdb:
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      INFLUX_URL: http://influxdb:8086/tweets
+    links:
+      - influxdb
+    command: reflex -r '\.go$$' -s -- sh -c 'go build && ./sample-influxdb'
+
 
