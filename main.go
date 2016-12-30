@@ -79,5 +79,35 @@ func startWorker() Closer {
 	_ = client
 	demux := twitter.NewSwitchDemux()
 	_ = demux
+	demux.Tweet = func(tweet *twitter.Tweet) {
+		fmt.Println(tweet.Text)
+	}
+	demux.DM = func(dm *twitter.DirectMessage) {
+		fmt.Println(dm.SenderID)
+	}
+	demux.Event = func(event *twitter.Event) {
+		fmt.Printf("%#v\n", event)
+	}
+	fmt.Println("Starting Stream...")
+
+	// FILTER
+	filterParams := &twitter.StreamFilterParams{
+		Track:         []string{"#Travail"},
+		StallWarnings: twitter.Bool(true),
+	}
+	stream, err := client.Streams.Filter(filterParams)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Receive messages until stopped or stream quits
+	go demux.HandleChan(stream.Messages)
+
+	// Wait for SIGINT and SIGTERM (HIT CTRL-C)
+	ch := make(chan os.Signal)
+	signal.Notify(ch, syscall.SIGINT, syscall.SIGTERM)
+	log.Println(<-ch)
+
+	fmt.Println("Stopping Stream...")
+	stream.Stop()
 	return nil
 }

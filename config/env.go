@@ -22,7 +22,7 @@ func init() {
 		}
 	}
 
-	if E["TWITTER_CONSUER_KEY"] == "" || E["TWITTER_CONSUMER_SECRET"] == "" || E["TWITTER_ACCESS_TOKEN"] == "" || E["TWITTER_ACCESS_SECRET"] == "" {
+	if E["TWITTER_CONSUMER_KEY"] == "" || E["TWITTER_CONSUMER_SECRET"] == "" || E["TWITTER_ACCESS_TOKEN"] == "" || E["TWITTER_ACCESS_SECRET"] == "" {
 		log.Fatal("Missing Twitter OAuth1 information")
 	}
 }

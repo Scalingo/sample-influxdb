@@ -4,14 +4,37 @@
 	"GodepVersion": "v74",
 	"Deps": [
 		{
+			"ImportPath": "github.com/cenkalti/backoff",
+			"Comment": "v1.0.0-15-gb02f2bb",
+			"Rev": "b02f2bbce11d7ea6b97f282ef1771b0fe2f65ef3"
+		},
+		{
 			"ImportPath": "github.com/codegangsta/inject",
 			"Comment": "v1.0-rc1-10-g33e0aa1",
 			"Rev": "33e0aa1cb7c019ccc3fbe049a8262a6403d30504"
 		},
 		{
+			"ImportPath": "github.com/dghubble/go-twitter/twitter",
+			"Rev": "dfa33c3e148509026d246fb8b97fffc7093ea260"
+		},
+		{
+			"ImportPath": "github.com/dghubble/oauth1",
+			"Comment": "v0.4.0-13-g67de468",
+			"Rev": "67de46873d807fffa7cd47fdae2531e23a8e994c"
+		},
+		{
+			"ImportPath": "github.com/dghubble/sling",
+			"Comment": "v1.1.0",
+			"Rev": "eb56e89ac5088bebb12eef3cb4b293300f43608b"
+		},
+		{
 			"ImportPath": "github.com/go-martini/martini",
 			"Comment": "v1.0-186-gfe605b5",
 			"Rev": "fe605b5cd210047ae3bb73d2b69a5b912a9b423d"
+		},
+		{
+			"ImportPath": "github.com/google/go-querystring/query",
+			"Rev": "9235644dd9e52eeae6fa48efd539fdc351a0af53"
 		},
 		{
 			"ImportPath": "github.com/martini-contrib/render",
@@ -20,6 +43,10 @@
 		{
 			"ImportPath": "github.com/oxtoacart/bpool",
 			"Rev": "4e1c5567d7c2dd59fa4c7c83d34c2f3528b025d6"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "8fd7f25955530b92e73e9e1932a41b522b22ccd9"
 		}
 	]
 }
