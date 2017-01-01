@@ -1,0 +1,7 @@
+{
+  "name": "Sample InfluxDB",
+  "description": "Sample web application using the InfluxDB timeseries database",
+  "logo": "https://scalingo.com/logo.svg",
+  "repository": "https://github.com/Scalingo/sample-influxdb",
+  "website": "https://scalingo.com"
+}
