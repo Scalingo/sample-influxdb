@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Greetings from a sample Go app built with the Martini framework interacting with InfluxDB!</title>
+    <title>Greetings from a sample web app using the InfluxDB timeseries database!</title>
     <meta content='website' property='og:type'>
     <meta content='https://cdn.scalingo.com/homepage/assets/fb-33a6a93ddbf90bfdae57407481aa05a4.png' property='og:image'>
-    <meta content="Deploying your own Go/Martini/InfluxDB app on Scalingo is as easy as pie: JUST CLICK THIS BUTTON! It will be up in less than 2 minutes!" property='og:description'>
+    <meta content="Deploying your own InfluxDB app on Scalingo is easy as a pie: JUST CLICK THIS BUTTON! It will be up in less than 2 minutes!" property='og:description'>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -68,7 +68,7 @@
         .scalingo-logo, .heart-logo { margin-bottom: 1rem; }
       }
     </style>
-    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="d3.v3.min.js" charset="utf-8"></script>
     <script src="c3/c3.min.js"></script>
     <script src="load_tweets.js"></script>
   </head>
@@ -79,14 +79,14 @@
         <img class="heart-logo" alt="love" src="https://cdn.scalingo.com/documentation/heart.png">
         <img class="influxdb-logo" alt="InfluxDB" src="influxdb_logo.svg">
       </div>
-      <h1>Greetings from a sample Go app <br/> built with the Martini framework<br/>and an InfluxDB
-        database!</h1>
+      <h1>Greetings from a sample web app using an InfluxDB timeseries database!</h1>
 
       <h2>Number of tweets for the hashtag #{{.Hashtag}} in the last {{.LastMinutes}} minutes</h2>
       <div id="chart"></div>
       
       <h2>
-        <span style="display:block;"><span class="one-liner">Deploying your own Go/Martini/InfluxDB app on Scalingo</span> is as easy as pie:</span>
+        <span style="display:block;"><span class="one-liner">Deploying your own InfluxDB app on
+            Scalingo</span> is easy as a pie:</span>
         <a class="btn"
           href="https://my.scalingo.com/deploy?source=https://github.com/Scalingo/sample-influxdb">Just click this button!</a>
         <span style="display:block;">It will be up in less than 2 minutes!</span>
