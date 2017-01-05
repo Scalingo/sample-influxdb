@@ -4,5 +4,27 @@
   "logo": "https://scalingo.com/logo.svg",
   "repository": "https://github.com/Scalingo/sample-influxdb",
   "website": "https://scalingo.com",
+  "env": {
+    "HASHTAG": {
+      "description": "Hashtag you want to follow",
+      "value": "RT"
+    },
+    "TWITTER_CONSUMER_KEY": {
+      "description": "Twitter API credential",
+      "value": ""
+    },
+    "TWITTER_CONSUMER_SECRET": {
+      "description": "Twitter API credential",
+      "value": ""
+    },
+    "TWITTER_ACCESS_TOKEN": {
+      "description": "Twitter API credential",
+      "value": ""
+    },
+    "TWITTER_ACCESS_SECRET": {
+      "description": "Twitter API credential",
+      "value": ""
+    }
+  },
   "addons": ["scalingo-influxdb"]
 }

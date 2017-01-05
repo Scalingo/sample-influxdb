@@ -11,8 +11,8 @@ services:
     volumes:
       - ./:/go/src/github.com/Scalingo/sample-influxdb
     environment:
-      INFLUX_URL: http://influxdb:8086/tweets
-      HASHTAG: osezdirenon
+      INFLUX_URL: http://EtienneM:influxdb4ever@influxdb:8086/tweets
+      HASHTAG: RT
       TWITTER_CONSUMER_KEY: 
       TWITTER_CONSUMER_SECRET: 
       TWITTER_ACCESS_TOKEN: 
@@ -27,8 +27,8 @@ services:
     ports:
       - 3000:3000
     environment:
-      INFLUX_URL: http://influxdb:8086/tweets
-      HASHTAG: osezdirenon
+      INFLUX_URL: http://EtienneM:influxdb4ever@influxdb:8086/tweets
+      HASHTAG: 2017in3words
     links:
       - influxdb
     command: reflex -r '\.go$$' -s -- sh -c 'go build && ./sample-influxdb'
