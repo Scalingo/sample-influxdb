@@ -40,6 +40,9 @@ func Start() utils.Closer {
 			r.Error(500)
 			return
 		}
+		if tweets == nil {
+			tweets = []influx.InfluxValue{}
+		}
 		r.JSON(200, tweets)
 	})
 
