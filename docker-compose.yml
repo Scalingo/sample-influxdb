@@ -1,7 +1,7 @@
 version: '2'
 services:
   influxdb:
-    image: influxdb:1.1.1
+    image: influxdb:1.6.4
     ports:
       - 8086:8086
     volumes:
@@ -13,10 +13,10 @@ services:
     environment:
       INFLUX_URL: http://EtienneM:influxdb4ever@influxdb:8086/tweets
       HASHTAG: RT
-      TWITTER_CONSUMER_KEY: 
-      TWITTER_CONSUMER_SECRET: 
-      TWITTER_ACCESS_TOKEN: 
-      TWITTER_ACCESS_SECRET: 
+      TWITTER_CONSUMER_KEY:
+      TWITTER_CONSUMER_SECRET:
+      TWITTER_ACCESS_TOKEN:
+      TWITTER_ACCESS_SECRET:
     links:
       - influxdb
     command: reflex -r '\.go$$' -s -- sh -c 'go build && ./sample-influxdb -worker'
